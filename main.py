@@ -9,5 +9,12 @@ inlet = StreamInlet(streams[0])
 
 while True:
     sample, timestamp = inlet.pull_sample()
-    print(f"Sample: {sample}, Timestamp: {timestamp}")
-    time.sleep(3)
+    tp9 = sample[0]
+    af7 = sample[1]
+    af8 = sample[2]
+    tp10 = sample[3]
+    print("----------------")
+    print("tp9: " + str(tp9), "af7: "+ str(af7), "af8: "+ str(af8), "tp10: "+ str(tp10))
+    print(timestamp)
+    print("----------------")
+    time.sleep(1)
