@@ -1,7 +1,14 @@
 import time
 import pandas as pd
+import numpy as np
 from brainflow.board_shim import BoardShim, BrainFlowInputParams, LogLevels, BoardIds
 from brainflow.data_filter import DataFilter, FilterTypes, AggOperations, WindowOperations
+from scipy.integrate import simps
+
+# Helper function to compute band power manually
+from scipy.integrate import simps
+from mne.time_frequency import psd_array_multitaper
+
 
 # Step 1: Set up BrainFlow connection
 params = BrainFlowInputParams()
@@ -19,8 +26,6 @@ try:
     
     # Step 3: Retrieve Data
     data = board.get_board_data()
-
-
     eeg_channels = BoardShim.get_eeg_channels(board_id)
 
 
@@ -29,30 +34,51 @@ try:
     bands = ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma']
     for channel in eeg_channels:
         nfft = DataFilter.get_nearest_power_of_two(BoardShim.get_sampling_rate(board_id))
-        psd = DataFilter.get_psd_welch(data[channel], nfft, nfft // 2, BoardShim.get_sampling_rate(board_id), WindowOperations.HANNING.value)
+        
+        # Welch PSD
+        psd_welch = DataFilter.get_psd_welch(
+            data[channel], nfft, nfft // 2, 
+            BoardShim.get_sampling_rate(board_id), 
+            WindowOperations.HANNING.value
+        )
 
-
-        print(data[channel])
-        print(BoardShim.get_sampling_rate(board_id))
-        # Compute band power for each frequency band
-        delta = DataFilter.get_band_power(psd, 0.5, 4.0)
-        theta = DataFilter.get_band_power(psd, 4.0, 8.0)
-        alpha = DataFilter.get_band_power(psd, 8.0, 13.0)
-        beta = DataFilter.get_band_power(psd, 13.0, 30.0)
-        gamma = DataFilter.get_band_power(psd, 30.0, 100.0)
-
-        band_powers.append([delta, theta, alpha, beta, gamma])
+    
+        # Print debug information
+        print(f"Channel {channel} data: {data[channel]}")
+        print(f"Sampling rate: {BoardShim.get_sampling_rate(board_id)}")
+        
+        # Compute band power for each frequency band (Welch)
+        delta_welch = DataFilter.get_band_power(psd_welch, 0.5, 4.0)
+        theta_welch = DataFilter.get_band_power(psd_welch, 4.0, 8.0)
+        alpha_welch = DataFilter.get_band_power(psd_welch, 8.0, 13.0)
+        beta_welch = DataFilter.get_band_power(psd_welch, 13.0, 30.0)
+        gamma_welch = DataFilter.get_band_power(psd_welch, 30.0, 100.0)
+        
+        band_powers.append([delta_welch, theta_welch, alpha_welch, beta_welch, gamma_welch])
 
     # Step 5: Save Band Powers to CSV
-    df = pd.DataFrame(band_powers, columns=bands, index=[f"EEG Channel {i+1}" for i in range(len(eeg_channels))])
+    #columns = [f"{band}_Welch" for band in bands]
+    #df = pd.DataFrame(band_powers, columns=columns, index=[f"EEG Channel {i+1}" for i in range(len(eeg_channels))])
+
+    df = pd.DataFrame(band_powers)
     df.index.name = "Channel"
-    # Save as comma-separated CSV
     df.to_csv("brainwave_bandpowers.csv", sep=",", index=True)
     print("Bandpower data saved to 'brainwave_bandpowers.csv'")
 
+    # Step 6: Visualization of the total Band Power
+    # import matplotlib.pyplot as plt
+
+    # for i, channel in enumerate(eeg_channels):
+    #     plt.figure(figsize=(6, 4))
+    #     plt.plot(psd_welch[0], psd_welch[1], label="Welch", alpha=0.7)
+    #     plt.xlabel("Frequency (Hz)")
+    #     plt.ylabel("Power Spectral Density")
+    #     plt.legend()
+    #     plt.grid(True)
+    #     plt.show()
 
 finally:
-    # Step 6: Release Session
+    # Step 7: Release Session
     board.stop_stream()
     board.release_session()
     print("Session ended.")
