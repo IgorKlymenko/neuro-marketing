@@ -30,7 +30,7 @@ try:
     board.prepare_session()
     board.start_stream(45000)
     print("Collecting data for 10 seconds...")
-    time.sleep(10)
+    time.sleep(15)
     
     # Step 3: Retrieve Data
     data = board.get_board_data()
@@ -60,7 +60,7 @@ try:
         theta_welch = DataFilter.get_band_power(psd_welch, 4.0, 8.0)
         alpha_welch = DataFilter.get_band_power(psd_welch, 8.0, 13.0)
         beta_welch = DataFilter.get_band_power(psd_welch, 13.0, 30.0)
-        gamma_welch = DataFilter.get_band_power(psd_welch, 30.0, 100.0)
+        gamma_welch = DataFilter.get_band_power(psd_welch, 30.0, 50.0)
         
         band_powers.append([delta_welch, theta_welch, alpha_welch, beta_welch, gamma_welch])
 
@@ -69,7 +69,7 @@ try:
     #           Band Power Measurement Table Formatting
     #
     #       Delta   Theta   Alpha   Beta    Gamma
-    # EEG_1
+    # EEG_1 
     # EEG_2 
     # EEG_3
     # EEG_4
