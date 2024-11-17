@@ -1,0 +1,111 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter run
+
+## exception
+
+RPCError: getVM: (-32000) Service connection disposed
+
+```
+#0      VmService._call (package:vm_service/src/vm_service.dart:1769:7)
+#1      VmService.getVM (package:vm_service/src/vm_service.dart:1245:25)
+#2      FlutterDevice.initLogReader (package:flutter_tools/src/resident_runner.dart:428:55)
+#3      HotRunner.attach (package:flutter_tools/src/run_hot.dart:266:21)
+<asynchronous suspension>
+#4      RunCommand.runCommand (package:flutter_tools/src/commands/run.dart:867:27)
+<asynchronous suspension>
+#5      FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1408:27)
+<asynchronous suspension>
+#6      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:153:19)
+<asynchronous suspension>
+#7      CommandRunner.runCommand (package:args/command_runner.dart:212:13)
+<asynchronous suspension>
+#8      FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:420:9)
+<asynchronous suspension>
+#9      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:153:19)
+<asynchronous suspension>
+#10     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:364:5)
+<asynchronous suspension>
+#11     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:130:9)
+<asynchronous suspension>
+#12     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:153:19)
+<asynchronous suspension>
+#13     main (package:flutter_tools/executable.dart:93:3)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[32m[✓][39m Flutter (Channel stable, 3.24.5, on macOS 14.6.1 23G93
+    darwin-arm64, locale en-CA)
+    [32m•[39m Flutter version 3.24.5 on channel stable at
+      /Users/ayanimran/Documents/natHacks/flutter
+    [32m•[39m Upstream repository https://github.com/flutter/flutter.git
+    [32m•[39m Framework revision dec2ee5c1f (4 days ago), 2024-11-13
+      11:13:06 -0800
+    [32m•[39m Engine revision a18df97ca5
+    [32m•[39m Dart version 3.5.4
+    [32m•[39m DevTools version 2.37.3
+
+[32m[✓][39m Android toolchain - develop for Android devices (Android SDK
+    version 35.0.0)
+    [32m•[39m Android SDK at
+      /Users/ayanimran/Library/Java/JavaVirtualMachines/openjdk-22.
+      0.2/Contents/Home
+    [32m•[39m Platform android-35, build-tools 35.0.0
+    [32m•[39m ANDROID_HOME =
+      /Users/ayanimran/Library/Java/JavaVirtualMachines/openjdk-22.
+      0.2/Contents/Home
+    [32m•[39m Java binary at: /Applications/Android
+      Studio.app/Contents/jbr/Contents/Home/bin/java
+    [32m•[39m Java version OpenJDK Runtime Environment (build
+      21.0.3+-79915917-b509.11)
+    [32m•[39m All Android licenses accepted.
+
+[32m[✓][39m Xcode - develop for iOS and macOS (Xcode 16.1)
+    [32m•[39m Xcode at /Applications/Xcode.app/Contents/Developer
+    [32m•[39m Build 16B40
+    [32m•[39m CocoaPods version 1.16.2
+
+[32m[✓][39m Chrome - develop for the web
+    [32m•[39m Chrome at /Applications/Google
+      Chrome.app/Contents/MacOS/Google Chrome
+
+[32m[✓][39m Android Studio (version 2024.2)
+    [32m•[39m Android Studio at /Applications/Android Studio.app/Contents
+    [32m•[39m Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    [32m•[39m Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    [32m•[39m Java version OpenJDK Runtime Environment (build
+      21.0.3+-79915917-b509.11)
+
+[32m[✓][39m VS Code (version 1.95.3)
+    [32m•[39m VS Code at /Applications/Visual Studio Code.app/Contents
+    [32m•[39m Flutter extension version 3.100.0
+
+[32m[✓][39m Connected device (4 available)
+    [32m•[39m iPhone 16 (mobile)              •
+      6E3C5169-0D8B-46B6-836A-89AE47B15B24 • ios            •
+      com.apple.CoreSimulator.SimRuntime.iOS-18-1 (simulator)
+    [32m•[39m macOS (desktop)                 • macos
+      • darwin-arm64   • macOS 14.6.1 23G93 darwin-arm64
+    [32m•[39m Mac Designed for iPad (desktop) • mac-designed-for-ipad
+      • darwin         • macOS 14.6.1 23G93 darwin-arm64
+    [32m•[39m Chrome (web)                    • chrome
+      • web-javascript • Google Chrome 130.0.6723.119
+    [33m![39m Error: Browsing on the local area network for Natalie. Ensure
+      the device is unlocked and attached with a cable or
+      associated with the same local area network as this Mac.
+      The device must be opted into Developer Mode to connect
+      wirelessly. (code -27)
+
+[32m[✓][39m Network resources
+    [32m•[39m All expected network resources are available.
+
+[32m•[39m No issues found!
+```

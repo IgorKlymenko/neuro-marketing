@@ -1,38 +1,16 @@
-# Usage:
-- pip install muselsl
-  pip install pylsl
-- muselsl stream
-- python main.py
+# nathacks_app
 
+A new Flutter project.
 
+## Getting Started
 
-# Some Simple Science
+This project is a starting point for a Flutter application.
 
-## How to Analyze EEG
+A few resources to get you started if this is your first Flutter project:
 
-### Big Picture
-You decompose the data into distinct frequency bands:
-- delta (0.5-4 Hz)
-- theta (4-8 Hz)
-- alpha (8-12 Hz)
-- beta (12-30 Hz)
-- gamma (30-100 Hz)
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-The decomposition is usually achieved through the **(Fast) Fourier Transforms (FFT)**, in simple language - the amplitude of specific frequency
-
-Additionaly **magnitude-squared** is taken from the FFT to calculate **power spectral density (periodogram)** expressed in (micro)-Volts^2 per Hertz for EEG.
-
-### What we do
-For simplicity we use **average band power** - in simple language - contribution of the given fr band to the oberall power of the signal.
-
-Not surprisingly, we can calculate the **Relative Band Power** dividing ave band power by total power.
-
-### What Matters
-1. We can find the relative band power (amount of contribution)
-2. We can compare band powers and conclude (ex. delta / beta ratio is a well-known index of slow-wave sleep quality)
-
-### What does not matter (for now)
-Average bandpower using Multitaper methods - way too complicated - have spent wuite a bit tof time
-I feel that it is unnecessary not working when we are already using brainflow API
-
-
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
