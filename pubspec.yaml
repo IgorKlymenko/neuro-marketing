@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
   fl_chart: ^0.55.0
+  charts_flutter: ^0.12.0
   cupertino_icons: ^1.0.8
 
 # Development dependencies
@@ -28,3 +29,5 @@ dev_dependencies:
 flutter:
   # Ensures Material Icons font is included
   uses-material-design: true
+  assets:
+    - assets/icon_app.png
